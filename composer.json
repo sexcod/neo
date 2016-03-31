@@ -38,13 +38,13 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "php index.php optimize"
+            "php www/index.php optimize"
         ],
         "post-update-cmd": [
-            "php index.php optimize"
+            "php www/index.php optimize"
         ],
         "post-create-project-cmd": [
-            "php index.php key:generate"
+            "php www/index.php key:generate"
         ]
     }
 }

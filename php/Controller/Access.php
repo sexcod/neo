@@ -5,7 +5,7 @@
  * @license     MIT
  * @author      Bill Rocha - prbr@ymail.com
  * @version     0.0.1
- * @package     Limp
+ * @package     Controller
  * @access      public
  * @since       0.3.0
  *
@@ -32,40 +32,36 @@
  * THE SOFTWARE.
  */
 
-// Defaults
-error_reporting(E_ALL ^ E_STRICT);
-setlocale (LC_ALL, 'pt_BR');
-mb_internal_encoding('UTF-8');
-date_default_timezone_set('America/Sao_Paulo'); 
+namespace Controller;
 
-// Developer only
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-ini_set('track_errors', '1');
+use Controller\Guest\Base;
+use Model;
+use Neos\App;
+use Neos\Data;
 
-// Constants
-// Path to WWW
-define('_WWW', str_replace('\\', '/', strpos(__DIR__, 'phar://') !== false
-                    ? dirname(str_replace('phar://', '', __DIR__)).'/'
-                    : __DIR__.'/'));
-define('_PHAR', (strpos(_WWW, 'phar://') !== false) ? _WWW : false); //Path if PHAR mode or false
-define('_PHP', dirname(_WWW).'/php/');       //Path to Application
-define('_HTML', dirname(_WWW).'/html/');     //Path to HTML files
+/**
+ * Description of home
+ *
+ * @author Bill
+ */
+class Access extends Base 
+{
 
-// Composer autoload
-include dirname(_WWW).'/vendor/autoload.php';
 
-// ------- optional - replace with your favorite libraries/solutions 
+    function pageNotFound(){
+        $this->navbar = null;
+        $this->response('nopage');
+    }
 
-// Error/Exception
-set_error_handler(['Neos\Debug','errorHandler']);
-set_exception_handler(['Neos\Debug', 'exceptionHandler']);
+    function logout()
+    {
+    	//Destruindo a session
+    	session_start();
+        $_SESSION['login'] = false;
+        $_SESSION['token'] = '';
+        session_destroy();
 
-// Cli mode
-if(php_sapi_name() === 'cli') return new Neos\Cli($argv);
-
-//Router config
-include _PHP.'Config/router.php';
-
-//Runnig ...
-Neos\Router::this()->run();
+        //Vai para a página inicial
+        App::go();
+    }
+}

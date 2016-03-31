@@ -54,7 +54,7 @@ class Home extends Base
                                  "-----BEGIN PUBLIC KEY-----",
                                  "-----END PUBLIC KEY-----"),
                               '',
-                              file_get_contents(_CONFIG.'keys/public.key'));
+                              file_get_contents(_PHP.'Config/keys/public.key'));
         $this->response('index',null,'index',['KEY'=>$key],['login'],['index']);
     }
 
@@ -65,7 +65,7 @@ class Home extends Base
         	&& trim($_POST['key']) !== ''){ 
 
             //Decodificando RSA
-            $private = file_get_contents(_CONFIG.'keys/private.key');
+            $private = file_get_contents(_PHP.'Config/keys/private.key');
             $key = base64_decode($_POST['key']);
             if(!openssl_private_decrypt($key, 
                                         $key, 

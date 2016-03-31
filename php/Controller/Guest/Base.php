@@ -1,6 +1,6 @@
 <?php
 /**
- * NEOS PHP FRAMEWORK
+ * Limp - less is more in PHP
  * @copyright   Bill Rocha - http://google.com/+BillRocha
  * @license     MIT
  * @author      Bill Rocha - prbr@ymail.com
@@ -32,7 +32,7 @@
  * THE SOFTWARE.
  */
 
-namespace Controller\App;
+namespace Controller\Guest;
 
 use Model;
 use Neos;
@@ -43,23 +43,20 @@ abstract class Base
 {
     public $model = null;
     public $key = null;
+    public $params = [];
 
     public $scripts = ['all'];
     public $styles = ['all'];
 
     public $navbar = null;
 
-
     /** Abstratic Controller constructor
      *  -- Bypass it in your controller
      */
-    function __construct() 
+    function __construct($params) 
     {
-        session_start();
-        $this->checkTokenSession();
-
-        $this->model = new Model\App\Base;
-        $this->navbar = 'admin/navbar';
+        //save params
+        $this->params = $params;
     }
 
     /** Default MAIN method
@@ -68,35 +65,14 @@ abstract class Base
     function main() 
     {
         $d = new Neos\Html('nopage');
-        $d->sendCache();
-        $d->val('title', 'Zumbi :: 404')
-                ->insertStyles(['reset', 'nopage'])
+        //$d->sendCache();
+        $d->val('title', 'Page not found :: 404')
                 ->body('nopage')
                 ->render()
                 ->send();
     }
 
     // ----------- USER FUNCTIONS --------------
-    
-    /**
-     * checa se a sessão tem um token válido
-     * @param  string $url Vai para a URL indicada em caso de falha
-     * @return bool        Retorna TRUE
-     */
-    final function checkTokenSession($url = '')
-    {
-        if(!isset($_SESSION['token'])) App::go($url);
-
-        $db = (new Model\User)->getById($_SESSION['login']);
-
-        Data\Aes::size(256);
-        $dec = Data\Aes::dec($_SESSION['token'], $db['token']);
-
-        if($dec){
-            if($db['login'].$db['senha'] == $dec) return true;
-        }
-        App::go('logout');
-    }
 
     /** Decodifica entrada via Post
      *
@@ -205,37 +181,5 @@ abstract class Base
         return $d->render()->send();
     }
 
-
-    /**
-     * Pivo de ação
-     */
-    public final function action() 
-    {
-        switch($_POST['action']){
-            case 'delete':
-                return $this->delete($_POST['id']);
-                break;
-
-            case 'form':
-                return $this->form($_POST['id']);
-                break;
-
-            case 'save':                
-                //decode Json object
-                $data = json_decode(json_decode($_POST['data']));
-
-                //Object to Array
-                $values = get_object_vars($data);
-                
-                //Select DB action: update/insert and get hook
-                if(isset($values['id']) && (0+$values['id'] < 0 || $values['id'] !== '')){
-                    return $this->update($values);
-                } else {
-                    unset($values['id']);
-                    return $this->insert($values);
-                }
-                break;
-        }  
-    }
 
 }
