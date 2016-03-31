@@ -53,7 +53,7 @@ define('_PHP', dirname(_WWW).'/php/');       //Path to Application
 define('_HTML', dirname(_WWW).'/html/');     //Path to HTML files
 
 // Composer autoload
-include _PHP.'vendor/autoload.php';
+include __DIR__.'/vendor/autoload.php';
 
 // ------- optional - replace with your favorite libraries/solutions 
 
