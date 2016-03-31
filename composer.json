@@ -1,0 +1,50 @@
+{
+
+    "name": "neo/app",
+    "type": "framework",
+    "description": "Base to PHP applications",
+    "keywords": ["micro framework","simple start"],
+    "homepage": "https://neos.tk",
+    "license": "MIT",
+    "authors": [{
+        "name": "Bill Rocha",
+        "email": "prbr@ymail.com"
+    }],
+    "config": {
+        "vendor-dir": "vendor",
+        "bin-dir": "vendor/bin",
+        "preferred-install": "dist"
+    },
+    "archive": {
+        "exclude": ["/doc", "/*.json", "/.git", "/*.md"]
+    },
+    "require": {
+        "php": ">=5.6.0",
+        "neo/lib": "~0.0.1"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Config\\": "php/Config/",
+            "Controller\\": "php/Controller/",
+            "Model\\": "php/Model/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/StackTest.php"
+        ]
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php index.php optimize"
+        ],
+        "post-update-cmd": [
+            "php index.php optimize"
+        ],
+        "post-create-project-cmd": [
+            "php index.php key:generate"
+        ]
+    }
+}

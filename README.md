@@ -1,2 +1,2 @@
-# neo
+# Neo
 Composer based PHP starter.
