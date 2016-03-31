@@ -14,9 +14,9 @@
  
 namespace Model\App;
 
-use Neo\Db;
+use Neos\Db;
 use Config\Database;
-use Neo\App;
+use Neos\App;
 
 class Base 
 {

@@ -4,7 +4,7 @@ namespace Controller;
 
 use Controller\App\Base;
 use Model;
-use Neo\App;
+use Neos\App;
 
 /**
  * Description of home

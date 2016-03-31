@@ -36,8 +36,8 @@ namespace Controller;
 
 use Controller\Guest\Base;
 use Model;
-use Neo\App;
-use Neo\Data;
+use Neos\App;
+use Neos\Data;
 
 /**
  * Description of home

@@ -32,7 +32,7 @@
  * THE SOFTWARE.
  */
 
-Neo\Router::this()
+Neos\Router::this()
 
     ->respond('get', '/', 'home', 'index')
     ->respond('post', '/', 'home', 'login')

@@ -15,7 +15,7 @@
 namespace Model;
 
 use Model\App\Base;
-use Neo\Db;
+use Neos\Db;
 
 class Access extends Base
 {

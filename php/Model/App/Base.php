@@ -14,9 +14,9 @@
  
 namespace Model\App;
 
-use Neo\Db;
+use Neos\Db;
 use Config\Database;
-use Neo\App;
+use Neos\App;
 
 class Base {
 
@@ -119,93 +119,4 @@ class Base {
         }
         return [];
     }
-
-    //Cliente empresa
-    public function cliente($cliente=null)
-    {
-        if($cliente ==null)
-        {
-            $and = '';
-        }
-        else{
-            $and = ' AND id = '.$cliente;
-        } 
-
-        $this->db->query('SELECT * FROM empresa WHERE tipo = \'Cliente\' '.$and);
-        if($this->db->result()){
-            foreach ($this->db->result() as $k => $v) {
-                $o[$v->get('id')] = ['nome_fantasia'=>$v->get('nome_fantasia')];
-            }
-            return $o;
-        }
-        return [];
-    }
-    
-     //Reboque empresa
-    public function reboque($reboque=null)
-    {
-        if($reboque ==null)
-        {
-            $and = '';
-        }
-        else{
-            $and = ' AND id = '.$reboque; 
-        } 
-
-        $this->db->query('SELECT * FROM empresa WHERE tipo = \'Reboque\' '.$and);
-        if($this->db->result()){
-            foreach ($this->db->result() as $k => $v) {
-                $o[$v->get('id')] = ['nome_fantasia'=>$v->get('nome_fantasia')];
-            }
-            return $o;
-        }
-        return [];
-    }
-
-    //Veículo Reboque
-    public function veiculoReboque($veiculo=null)
-    {
-        if($veiculo ==null)
-        {
-            $and = '';
-        }
-        else{
-
-            $and = ' AND id = '.$veiculo;
-        } 
-
-        $this->db->query('SELECT * FROM veiculo WHERE tipo = \'reboque\' '.$and);
-        if($this->db->result()){
-            foreach ($this->db->result() as $k => $v) {
-                $o[$v->get('id')] = ['placa'=>$v->get('placa')];
-            }
-            return $o;
-        }
-        return [];
-    }
-
-    //Empresa Matriz, Cliente, Reboque
-    public function empresas($empresas=null)
-    {
-        if($empresas ==null)
-        {
-            $and = '';
-        }
-        else{
-            $and = ' WHERE id = '.$empresas;
-        } 
-
-        $this->db->query('SELECT * FROM empresa '.$and);
-        if($this->db->result()){
-            foreach ($this->db->result() as $k => $v) {
-                $o[$v->get('id')] = ['nome_fantasia'=>$v->get('nome_fantasia')];
-            }
-            return $o;
-        }
-        return [];
-    }
-
-
-
-
 }

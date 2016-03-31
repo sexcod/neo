@@ -35,8 +35,8 @@
 namespace Controller\App;
 
 use Model;
-use Neo;
-use Neo\Data;
+use Neos;
+use Neos\Data;
 
 abstract class Base 
 {
@@ -66,7 +66,7 @@ abstract class Base
      */
     function main() 
     {
-        $d = new Neo\Html('nopage');
+        $d = new Neos\Html('nopage');
         $d->sendCache();
         $d->val('title', 'Zumbi :: 404')
                 ->insertStyles(['reset', 'nopage'])
@@ -178,7 +178,7 @@ abstract class Base
         $styles = null
         )
     {
-        $d = new Doc\Html(($name === null ? 'body' : $name));
+        $d = new Neos\Html(($name === null ? 'body' : $name));
         
         if($this->navbar !== null) $d->body($this->navbar);
 
@@ -239,77 +239,5 @@ abstract class Base
                 break;
         }  
     }
-
-//Estado
-    function getEstado($default = 1)
-    {
-        $estado = $this->model->estado();
-        $tmp['default'] = $default;
-        $tmp['data'] = [];
-        foreach ($estado as $k => $v) {
-            $tmp['data'][$k] = $v['nome'];
-        }
-        return $tmp;
-    }
-
-//Cidade
-    function getCidade($estado = 1, $default = 1)
-    {
-        $cidade = $this->model->cidade($estado);
-        $tmp['default'] = $default;
-        $tmp['data'] = [];
-        foreach ($cidade as $k => $v) {
-            $tmp['data'][$k] = $v['nome'];
-        }
-        return $tmp;
-    }
-
-    //Cliente empresa
-    function getCliente($default = 1)
-    {
-        $d = $this->model->cliente();
-        $tmp['default'] = $default;
-        $tmp['data'] = [];
-        foreach ($d as $k => $v) {
-            $tmp['data'][$k] = $v['nome_fantasia'];
-        }
-        return $tmp;
-    }
-    //Reboque empresa
-    function getReboque($default = 1)
-    {
-        $d = $this->model->reboque();
-        $tmp['default'] = $default;
-        $tmp['data'] = [];
-        foreach ($d as $k => $v) {
-            $tmp['data'][$k] = $v['nome_fantasia'];
-        }
-        return $tmp;
-    }
-
-     //Placa de Reboque
-    function getveiculoReboque($default = 1)
-    {
-        $d = $this->model->veiculoReboque();
-        $tmp['default'] = $default;
-        $tmp['data'] = [];
-        foreach ($d as $k => $v) {
-            $tmp['data'][$k] = $v['placa'];
-        }
-        return $tmp;
-    }
-
-     //Listas Empresas Matriz, Cliente, Reboque
-    function getEmpresas($default = 1)
-    {
-        $d = $this->model->empresas();
-        $tmp['default'] = $default;
-        $tmp['data'] = [];
-        foreach ($d as $k => $v) {
-            $tmp['data'][$k] = $v['nome_fantasia'];
-        }
-        return $tmp;
-    }
-
 
 }

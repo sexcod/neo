@@ -3,8 +3,8 @@
 namespace Controller\Api;
 
 use Model;
-use Neo\App;
-use Neo\Data;
+use Neos\App;
+use Neos\Data;
 
 class Pesquisa extends Base
 {

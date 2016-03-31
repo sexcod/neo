@@ -3,7 +3,7 @@
 namespace Model;
 
 use Model\App\Base;
-use Neo\App;
+use Neos\App;
 
 class Usuario extends Base
 {

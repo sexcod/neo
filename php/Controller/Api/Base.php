@@ -35,8 +35,8 @@
 namespace Controller\Api;
 
 use Model;
-use Neo\App;
-use Neo\Data;
+use Neos\App;
+use Neos\Data;
 
 abstract class Base 
 {
@@ -63,7 +63,7 @@ abstract class Base
      */
     function main() 
     {
-        $d = new Neo\Html('nopage');
+        $d = new Neos\Html('nopage');
         $d->sendCache();
         $d->val('title', 'Zumbi :: 404')
                 ->insertStyles(['reset', 'nopage'])
@@ -151,7 +151,7 @@ abstract class Base
         $styles = null
         )
     {
-        $d = new Doc\Html(($name === null ? 'body' : $name));
+        $d = new Neos\Html(($name === null ? 'body' : $name));
         
         if($this->navbar !== null) $d->body($this->navbar);
 
