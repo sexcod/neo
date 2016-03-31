@@ -38,11 +38,9 @@ a img:focus {
   cursor: zoom-in;
 }
 blockquote {
-  color: #890;
-  font-style: italic;
+  color: #AA0;
   font-size: 1.1em;
-  font-weight: 500;
-  text-shadow: 1px 1px 1px #9C9;
+  font-weight: 100;
 }
 hr.small {
   max-width: 100px;
