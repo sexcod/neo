@@ -1,6 +1,6 @@
 {
 
-    "name": "neo/app",
+    "name": "neos/app",
     "type": "framework",
     "description": "Base to PHP applications",
     "keywords": ["micro framework","simple start"],
@@ -20,7 +20,7 @@
     },
     "require": {
         "php": ">=5.6.0",
-        "neo/lib": "~0.0.1"
+        "neos/lib": "~0.0.1"
     },
     "require-dev": {
     },
