@@ -32,7 +32,7 @@
  * THE SOFTWARE.
  */
 
-namespace Controller\App;
+namespace Controller\Admin;
 
 use Model;
 use Neos;
@@ -44,10 +44,14 @@ abstract class Base
     public $model = null;
     public $key = null;
 
-    public $scripts = ['all'];
-    public $styles = ['all'];
+    public $scripts = ['source/jquery-1.12.2.min',
+                       'source/bootstrap.min',
+                       'source/clean-blog'];
+    public $styles =  ['source/bootstrap',
+                       'source/bootstrap-theme',
+                       'source/clean-blog'];
 
-    public $navbar = null;
+    public $navbar = 'admin/navbar';
 
 
     /** Abstratic Controller constructor
@@ -59,7 +63,6 @@ abstract class Base
         $this->checkTokenSession();
 
         $this->model = new Model\App\Base;
-        $this->navbar = 'admin/navbar';
     }
 
     /** Default MAIN method
@@ -69,9 +72,8 @@ abstract class Base
     {
         $d = new Neos\Html('nopage');
         $d->sendCache();
-        $d->val('title', 'Zumbi :: 404')
-                ->insertStyles(['reset', 'nopage'])
-                ->body('nopage')
+        $d->val('title', 'Page not found :: 404')
+                ->body('default/nopage')
                 ->render()
                 ->send();
     }
@@ -142,27 +144,6 @@ abstract class Base
         exit($enc);
     }
 
-    /** Retorna o diretório para linguagem aceita pelo browser
-     * Default = 'lang/en/'
-     *
-     */
-    final function langPath() 
-    {
-        $lang = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-
-        switch (substr($lang[0], 0, 2)) {
-            case 'pt': $l = 'pt';
-                break;
-            case 'es': $l = 'es';
-                break;
-            case 'fr': $l = 'fr';
-                break;
-            default: $l = 'en';
-                break;
-        }
-        return 'lang/' . $l . '/';
-    }
-
 
     /** 
      * Cria, configura e retorna o HTML para o usuário
@@ -182,7 +163,7 @@ abstract class Base
 
         $d->body($body);
 
-        $d->val('title', 'iReboque');
+        $d->val('title', 'NEOS PHP FRAMEWORK');
 
         if($var !== null){
             foreach ($var as $k=>$v) {

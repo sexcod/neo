@@ -37,9 +37,9 @@ namespace Config;
 
 class Database
 {
-	static $config = ['mysql'=>['dsn'=>'mysql:host=mysql2.gear.host;dbname=ireboque;charset=utf8',
-						 		'user'=>'ireboque',
-						 		'passw'=>'Qs2F!5b410L_'
+	static $config = ['mysql'=>['dsn'=>'mysql:host=localhost;dbname=dtbase;charset=utf8',
+						 		'user'=>'user',
+						 		'passw'=>'password'
 						 	   ],
 			   		  'sqlite'=>['dsn'=>'sqlite.db']
 			   		 ];

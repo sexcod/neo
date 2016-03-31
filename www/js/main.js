@@ -1,7 +1,5 @@
 $(window).load(function() {
 
-	$("#pageonloading").hide();
-
-
+	//code here...
 
 });

@@ -34,11 +34,14 @@
 
 Neos\Router::this()
 
-    ->respond('get', '/', 'home', 'index')
+    ->respond('get', '/', 'home::index')
     ->respond('post', '/', 'home', 'login')
     ->respond('get|post', '/logout', 'home', 'logout')
 
-    ->respond('get', '/dashboard', 'dashboard', 'index')
+    ->respond('get', '/admin/dashboard', 'dashboard', 'index')
+    ->respond('get', '/about', 'Home::about')
+    ->respond('get', '/post', 'Home::post')
+    ->respond('get', '/contact', 'Home::contact')
 
     //APIs
     ->respond('post', '/api', 'Api\Pesquisa', 'ajax');

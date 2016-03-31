@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Controller\App\Base;
+use Controller\Admin\Base;
 use Model;
 use Neos\App;
 

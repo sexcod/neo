@@ -55,7 +55,25 @@ class Home extends Base
                                  "-----END PUBLIC KEY-----"),
                               '',
                               file_get_contents(_PHP.'Config/keys/public.key'));
-        $this->response('index',null,'index',['KEY'=>$key],['login'],['index']);
+        $this->response('home',null,'index',['KEY'=>$key]);
+    }
+
+
+    function about()
+    {
+        $this->response('about');
+    }
+
+
+    function post()
+    {
+        $this->response('post');
+    }
+
+
+    function contact()
+    {
+        $this->response('contact');
     }
 
 
