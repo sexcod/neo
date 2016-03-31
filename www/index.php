@@ -53,9 +53,8 @@ define('_PHP', dirname(_WWW).'/php/');       //Path to Application
 define('_HTML', dirname(_WWW).'/html/');     //Path to HTML files
 
 // Composer autoload
-include dirname(_WWW).'/vendor/autoload.php';
 
-// ------- optional - replace with your favorite libraries/solutions 
+include dirname(_WWW).'/vendor/autoload.php';
 
 // Error/Exception
 set_error_handler(['Neos\Debug','errorHandler']);
